@@ -5,6 +5,7 @@ import os
 import secrets
 import time
 
+from cryptojwt.jwt import utc_time_sans_frac
 import pytest
 
 from oidcop.configure import OPConfiguration
@@ -30,7 +31,7 @@ def test_is_expired():
     assert is_expired(1, 1) is False
     assert is_expired(2, 1) is False
 
-    now = time.time()
+    now = utc_time_sans_frac()
     assert is_expired(now - 1)
     assert is_expired(now + 1) is False
 
